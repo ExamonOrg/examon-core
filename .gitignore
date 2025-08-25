@@ -1,0 +1,15 @@
+*.cpython-39.pyc
+/dist/
+examon_core/__pycache__/
+__pycache__/
+tests/**/__pycache__/
+examon_core/code_execution/__pycache__/
+examon_core/models/__pycache__/
+examon_core/factories/__pycache__/
+examon_core/code_execution/__pycache__/*.cpython-39.pyc
+examon_core/models/__pycache__/*.cpython-39.pyc
+examon_core/protocols/__pycache__/
+examon_core/metrics/__pycache__/
+examon_core/database/__pycache__/
+.history
+**/__pycache__/

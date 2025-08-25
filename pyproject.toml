@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "examon_core"
+version = "3.0.0"
+description = "Examon Core Libs"
+authors = ["Jarrod Folino <jdfolino@icloud.com>"]
+packages = [{include = "examon_core"}]
+
+[tool.poetry.dependencies]
+python = ">=3.10"
+radon = "^6.0.1"
+dataclasses-serialization = "^1.3.1"
+click = "^8.2.1"
+
+[tool.poetry.dev-dependencies]
+ruff = "^0.12.10"
+pytest = "^8.4.1"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.17.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+examon = "examon_core.presentation.cli:main"

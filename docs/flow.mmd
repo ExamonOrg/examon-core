@@ -1,0 +1,17 @@
+      sequenceDiagram
+            participant CLI as CLI Entry
+            participant Infra as Infrastructure
+            participant App as Application
+            participant Output as CLI Output
+
+            CLI->>Infra: Collect Python Files
+            Infra->>Infra: Extract Functions with @examon
+            Infra->>App: Create Question Object
+            App->>App: RemovePythonDecorators
+            App->>App: AppendPrint
+            App->>App: ChoicesDecorator
+            App->>App: PrintLogsDecorator
+            App->>App: MetricsDecorator
+            App->>App: UniqueIdDecorator
+            App->>Infra: JSONAdapter: Serialize to output.json
+            Infra->>Output: Output Results

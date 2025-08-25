@@ -1,0 +1,9 @@
+from typing import List, Protocol
+
+
+class CodeExecutionProtocol(Protocol):
+    def setup(self) -> None: ...
+
+    def teardown(self) -> None: ...
+
+    def execute(self, code: str) -> List[str]: ...

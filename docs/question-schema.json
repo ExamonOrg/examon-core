@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Question",
+  "type": "object",
+  "properties": {
+    "internal_id": { "type": "string" },
+    "function_src": { "type": "string" },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "choices": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "hints": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "repository": { "type": "string" },
+    "version": { "type": "string" },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "difficulty": { "type": "number" },
+        "no_of_functions": { "type": "integer" },
+        "loc": { "type": "integer" },
+        "lloc": { "type": "integer" },
+        "sloc": { "type": "integer" },
+        "categorised_difficulty": { "type": "string" },
+        "imports": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "counts": {
+          "type": "object",
+          "additionalProperties": { "type": "integer" }
+        }
+      },
+      "required": [
+        "difficulty",
+        "no_of_functions",
+        "loc",
+        "lloc",
+        "sloc",
+        "categorised_difficulty",
+        "imports",
+        "counts"
+      ]
+    }
+  },
+  "required": ["internal_id", "function_src", "choices", "metrics"]
+}
