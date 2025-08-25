@@ -1,8 +1,13 @@
       sequenceDiagram
+            %% Presentation Layer
             participant CLI as CLI Entry
-            participant Infra as Infrastructure
-            participant App as Application
             participant Output as CLI Output
+
+            %% Infrastructure Layer
+            participant Infra as Infrastructure
+
+            %% Application Layer
+            participant App as Application
 
             CLI->>Infra: Collect Python Files
             Infra->>Infra: Extract Functions with @examon
@@ -13,5 +18,5 @@
             App->>App: PrintLogsDecorator
             App->>App: MetricsDecorator
             App->>App: UniqueIdDecorator
-            App->>Infra: JSONAdapter: Serialize to output.json
+            App->>Infra: JSONAdapter: Serialize json
             Infra->>Output: Output Results
