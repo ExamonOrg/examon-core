@@ -125,40 +125,31 @@ class CopyrightEnricher(FunctionSourceEnricher):
 	def build(self, function_src):
 		return "# Copyright ABC 2025\n" + function_src
 
-chain = DecoratorChain(
-        [
-            DecoratorChain([RemovePythonDecorators(), AppendPrint(), CopyrightEnricher()]),
+chain = DecoratorChain([
             ChoicesDecorator(),
+            RemoveWrapperFunctionsDecorator(),
+            CopyrightEnricher(),
+            PrintFunctionCall(),
             PrintLogsDecorator(UnrestrictedDriver()),
-            MetricsDecorator(
-                MetricsAnalyser(
-                    collector=RadonMetricsAnalysis(),
-                    difficulty_classifier=SimpleDifficultyClassifier(),
-                )
-            ),
+            MetricsDecorator(RadonMetricsAnalysis()),
+            DifficultyClassificationDecorator(SimpleDifficultyClassifier()),
             UniqueIdDecorator(UniqueIdGenerator()),
-        ]
-    )
+        ])
 ```
 
 You can then use your customised chain own python script.
 
 ```python
 # Add imports
-chain = DecoratorChain(
-        [
-            DecoratorChain([RemovePythonDecorators(), AppendPrint(), CopyrightEnricher()]),
+chain = DecoratorChain([
             ChoicesDecorator(),
+            RemoveWrapperFunctionsDecorator(),
+            PrintFunctionCall(),
             PrintLogsDecorator(UnrestrictedDriver()),
-            MetricsDecorator(
-                MetricsAnalyser(
-                    collector=RadonMetricsAnalysis(),
-                    difficulty_classifier=SimpleDifficultyClassifier(),
-                )
-            ),
+            MetricsDecorator(RadonMetricsAnalysis()),
+            DifficultyClassificationDecorator(SimpleDifficultyClassifier()),
             UniqueIdDecorator(UniqueIdGenerator()),
-        ]
-    )
+        ])
 
 def main(paths: tuple[str, ...], file_name: str) -> None:
     files = FileCollector().collect_files(list(paths))
