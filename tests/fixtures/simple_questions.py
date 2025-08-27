@@ -1,5 +1,12 @@
 from examon_core.examon import examon
 
+@examon(
+    choices=["Hello Bob", "Hello"],
+)
+def question2():
+    name = "Michael"
+    return f"Hello, {name}"
+
 
 @examon(
     tags=["Python Data & Structure Basics", "Numbers"],
@@ -11,25 +18,18 @@ from examon_core.examon import examon
     ],
 )
 def question1():
-    return 2 + 1
-
-
-@examon(
-    choices=["Hello Bob", "Hello"],
-)
-def question2():
-    name = "Sam"
-    return f"Hello, {name}"
+    return 2 + 1 + 2 + 9
 
 
 @examon(
     tags=["Python Data & Structure Basics", "Strings"],
-    choices=["applebanana", "apple banana", "bananaapple"],
-    hints=[
-        "String concatenation joins two strings together.",
-        "What happens when you use + with two strings?",
-        "Try combining 'apple' and 'banana'.",
-    ],
+    choices=["fizz", "buzzfizz", "12345"],
+    hints=["5 mod 2 equals 1"],
 )
 def question3():
-    return "apple" + "banana"
+    result = ""
+    for n in [1, 2, 3, 4, 5]:
+        word = "fizz" if n % 2 == 0 else "buzz"
+        print(word)
+        result += word
+    return result

@@ -1,5 +1,4 @@
-# mypy: ignore-errors
-from radon.metrics import h_visit
+from radon.metrics import h_visit  # type: ignore
 from radon.raw import analyze  # type: ignore
 
 from examon_core.entities.metrics import Metrics

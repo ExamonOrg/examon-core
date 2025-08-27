@@ -2,7 +2,7 @@ from examon_core.application.decorators.decorator_chain import DecoratorChain
 from examon_core.application.decorators.print_function_call import (
     PrintFunctionCall,
 )
-from examon_core.application.decorators.remove_python_decorators_decorator import (
+from examon_core.application.decorators.remove_wrapper_functions_decorator import (
     RemoveWrapperFunctionsDecorator,
 )
 from examon_core.entities.question import Question
