@@ -1,4 +1,4 @@
-from examon_core.entities.question import Question
+from examon_core.entities import Question
 from examon_core.protocols import CodeExecutionProtocol
 from examon_core.protocols.question_decorator_protocol import QuestionDecoratorProtocol
 

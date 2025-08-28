@@ -1,6 +1,6 @@
 import ast
 
-from examon_core.entities.question import Question
+from examon_core.entities import Question
 
 
 class FunctionCollector:

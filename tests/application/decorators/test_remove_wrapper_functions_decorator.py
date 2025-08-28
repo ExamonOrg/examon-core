@@ -1,7 +1,5 @@
-from examon_core.application.decorators.remove_wrapper_functions_decorator import (
-    RemoveWrapperFunctionsDecorator,
-)
-from examon_core.entities.question import Question
+from examon_core.application.decorators import RemoveWrapperFunctionsDecorator
+from examon_core.entities import Question
 
 
 class TestRemoveWrapperFunctionsDecorator:

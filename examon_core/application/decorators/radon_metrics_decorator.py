@@ -1,8 +1,7 @@
 from radon.metrics import h_visit  # type: ignore
 from radon.raw import analyze  # type: ignore
 
-from examon_core.entities.metrics import Metrics
-from examon_core.entities.question import Question
+from examon_core.entities import Metrics, Question
 from examon_core.protocols import QuestionDecoratorProtocol
 
 

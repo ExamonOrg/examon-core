@@ -1,7 +1,5 @@
-from examon_core.application.decorators.unique_id_decorator import (
-    UniqueIdDecorator,
-)
-from examon_core.entities.question import Question
+from examon_core.application.decorators import UniqueIdDecorator
+from examon_core.entities import Question
 
 
 class TestDifficultyClassificationDecorator:
