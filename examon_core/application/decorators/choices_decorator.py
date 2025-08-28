@@ -9,4 +9,7 @@ class ChoicesDecorator(QuestionDecoratorProtocol):
         if not question.choices:
             question.choices = []
 
+        if question.correct_answer and question.correct_answer not in question.choices:
+            question.choices.append(question.correct_answer)
+
         return question

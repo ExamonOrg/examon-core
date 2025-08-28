@@ -2,7 +2,7 @@ from examon_core.application.default_factory import default_instance
 from examon_core.entities.question import Question
 
 
-class TestQuestionProcessorExpectedResult:
+class TestDefaultInstance:
     def test_build_print_logs(self, question_fn):
         question = default_instance().decorate(
             Question(function_src=question_fn, tags=["a"], hints=[])

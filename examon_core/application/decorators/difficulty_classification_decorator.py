@@ -1,18 +1,26 @@
+from examon_core.entities.metrics import Metrics
 from examon_core.entities.question import Question
 from examon_core.protocols import (
-    DifficultyClassifierProtocol,
     QuestionDecoratorProtocol,
 )
 
 
 class DifficultyClassificationDecorator(QuestionDecoratorProtocol):
-    def __init__(self, difficulty_classifier: DifficultyClassifierProtocol):
-        self.difficulty_classifier = difficulty_classifier
-
     def decorate(self, question: Question) -> Question:
         if question.metrics is not None:
-            question.metrics.categorised_difficulty = self.difficulty_classifier.run(
-                question.metrics
-            )
+            question.metrics.categorised_difficulty = self.__classify(question.metrics)
 
         return question
+
+    def __classify(self, metrics: Metrics) -> str:
+        value = metrics.difficulty
+        if value is None:
+            return "unknown"
+        if value == 0:
+            return "easy"
+        if value <= 1:
+            return "medium"
+        if value < 3:
+            return "hard"
+
+        return "very_hard"
