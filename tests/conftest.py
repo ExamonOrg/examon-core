@@ -2,6 +2,15 @@ import pytest
 
 
 @pytest.fixture
+def function_src_with_decorator():
+    return """
+@decorator
+def a():
+    return 6
+"""
+
+
+@pytest.fixture
 def very_complex_code():
     return """
 import sys, os
@@ -76,6 +85,7 @@ def function1():
 print(function1())
 """
 
+
 @pytest.fixture
 def code():
     return """
@@ -97,6 +107,7 @@ def function1():
 
 print(function1())
 """
+
 
 @pytest.fixture
 def question_fn():

@@ -5,7 +5,7 @@ from examon_core.entities.metrics import Metrics
 from examon_core.entities.question import Question
 
 
-class TestSimpleDifficultyClassifier:
+class TestDifficultyClassificationDecorator:
     def test_converts_function_to_string(self):
         question = Question(metrics=Metrics(difficulty=2))
 

@@ -5,31 +5,23 @@ from examon_core.application.analysis.code_analysis_visitor import (
 )
 from examon_core.entities.metrics import Metrics
 from examon_core.entities.question import Question
-from examon_core.protocols import (
-    MetricsAnalysisProtocol,
-    QuestionDecoratorProtocol,
-)
+from examon_core.protocols import QuestionDecoratorProtocol
 
 
 class MetricsDecorator(QuestionDecoratorProtocol):
-    def __init__(self, analyser: MetricsAnalysisProtocol):
-        self.analyser = analyser
-
     def decorate(self, question: Question) -> Question:
-        metrics = Metrics()
+        if question.metrics is None:
+            question.metrics = Metrics()
+
         if question.function_src == "":
             return question
-
-        metrics = self.analyser.run(question.function_src or "")
 
         tree = ast.parse(question.function_src or "")
         m = CodeAnalysisVisitor()
         m.visit(tree)
 
-        metrics.imports = list(m.modules)
-        metrics.calls = list(m.calls)
-        metrics.counts = m.counts
-
-        question.metrics = metrics
+        question.metrics.imports = list(m.modules)
+        question.metrics.calls = list(m.calls)
+        question.metrics.counts = m.counts
 
         return question
