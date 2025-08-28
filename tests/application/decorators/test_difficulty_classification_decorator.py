@@ -1,8 +1,5 @@
-from examon_core.application.decorators.difficulty_classification_decorator import (
-    DifficultyClassificationDecorator,
-)
-from examon_core.entities.metrics import Metrics
-from examon_core.entities.question import Question
+from examon_core.application.decorators import DifficultyClassificationDecorator
+from examon_core.entities import Metrics, Question
 
 
 class TestDifficultyClassificationDecorator:

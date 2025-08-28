@@ -2,7 +2,7 @@ import json
 
 from dataclasses_serialization.json import JSONSerializer  # type: ignore
 
-from examon_core.entities.question import Question
+from examon_core.entities import Question
 
 
 class JSONAdapter:

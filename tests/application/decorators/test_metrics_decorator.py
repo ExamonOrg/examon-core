@@ -1,5 +1,5 @@
-from examon_core.application.decorators.metrics_decorator import MetricsDecorator
-from examon_core.entities.question import Question
+from examon_core.application.decorators import MetricsDecorator
+from examon_core.entities import Question
 
 
 class TestMetricsDecorator:

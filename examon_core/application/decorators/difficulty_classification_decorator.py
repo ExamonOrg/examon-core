@@ -1,5 +1,4 @@
-from examon_core.entities.metrics import Metrics
-from examon_core.entities.question import Question
+from examon_core.entities import Metrics, Question
 from examon_core.protocols import (
     QuestionDecoratorProtocol,
 )

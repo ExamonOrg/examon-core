@@ -1,7 +1,7 @@
-from examon_core.application.decorators.print_function_call_decorator import (
-    PrintFunctionCallDecorator,
+from examon_core.application.decorators import (
+    AppendPrintDecorator,
 )
-from examon_core.entities.question import Question
+from examon_core.entities import Question
 
 simple_function = """
 def function1():
@@ -20,15 +20,13 @@ def question_with_decorator_mutliline():
 """
 
 
-class TestPrintFunctionCallDecorator:
+class TestAppendPrintDecorator:
     def test_converts_function_with_print_decorator(self):
-        result = PrintFunctionCallDecorator().decorate(
-            Question(function_src=simple_function)
-        )
+        result = AppendPrintDecorator().decorate(Question(function_src=simple_function))
         assert "print(function1())" in result.function_src
 
     def test_all(self):
-        result = PrintFunctionCallDecorator().decorate(
+        result = AppendPrintDecorator().decorate(
             Question(function_src=question_with_decorator_mutliline)
         )
         assert "print(question_with_decorator_mutliline())" in result.function_src

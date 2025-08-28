@@ -1,5 +1,5 @@
 from examon_core.application.default_factory import default_instance
-from examon_core.entities.question import Question
+from examon_core.entities import Question
 
 
 class TestDefaultInstance:

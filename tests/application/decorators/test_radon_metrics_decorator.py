@@ -1,7 +1,5 @@
-from examon_core.application.decorators.radon_metrics_decorator import (
-    RadonMetricsDecorator,
-)
-from examon_core.entities.question import Question
+from examon_core.application.decorators import RadonMetricsDecorator
+from examon_core.entities import Question
 
 
 class TestRadonMetricsDecorator:
