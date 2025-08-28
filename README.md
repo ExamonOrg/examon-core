@@ -115,49 +115,62 @@ Simply rename the file to questions.json and replace the file in public/question
 
 ## Customizing the decorators
 
-### Example: Custom Enrichment
+### Example: Custom Decorator Chain (with CLI)
 
 ```python
-from examon_core.application.question_factory import QuestionFactory
-from examon_core.application.enrich.function_source_enricher import FunctionSourceEnricher, AppendPrint, RemovePythonDecorators
+import click
 
-class CopyrightEnricher(FunctionSourceEnricher):
-	def build(self, function_src):
-		return "# Copyright ABC 2025\n" + function_src
+from examon_core.application.decorators import (
+    AppendPrintDecorator,
+    ChoicesDecorator,
+    DecoratorChain,
+    DifficultyClassificationDecorator,
+    MetricsDecorator,
+    PrintLogsDecorator,
+    RadonMetricsDecorator,
+    RemoveWrapperFunctionsDecorator,
+    UniqueIdDecorator,
+)
+from examon_core.application.execute.unrestricted_driver import UnrestrictedDriver
+from examon_core.application.extract.function_collector import FunctionCollector
+from examon_core.entities import Question
+from examon_core.infrastructure.adapters.json_adapter import JSONAdapter
+from examon_core.infrastructure.collection.file_collector import FileCollector
+from examon_core.protocols.question_decorator_protocol import QuestionDecoratorProtocol
 
-chain = DecoratorChain([
-            ChoicesDecorator(),
+
+class CopyrightEnricher(QuestionDecoratorProtocol):
+    def decorate(self, question: Question):
+        question.function_src = "# Copyright ABC 2025\n" + question.function_src
+        return question
+
+
+def my_instance() -> DecoratorChain:
+    return DecoratorChain(
+        [
             RemoveWrapperFunctionsDecorator(),
+            AppendPrintDecorator(),
+            PrintLogsDecorator(UnrestrictedDriver()),
+            ChoicesDecorator(),
+            MetricsDecorator(),
+            RadonMetricsDecorator(),
+            DifficultyClassificationDecorator(),
+            UniqueIdDecorator(),
             CopyrightEnricher(),
-            PrintFunctionCall(),
-            PrintLogsDecorator(UnrestrictedDriver()),
-            MetricsDecorator(RadonMetricsAnalysis()),
-            DifficultyClassificationDecorator(SimpleDifficultyClassifier()),
-            UniqueIdDecorator(UniqueIdGenerator()),
-        ])
-```
+        ]
+    )
 
-You can then use your customised chain own python script.
 
-```python
-# Add imports
-chain = DecoratorChain([
-            ChoicesDecorator(),
-            RemoveWrapperFunctionsDecorator(),
-            PrintFunctionCall(),
-            PrintLogsDecorator(UnrestrictedDriver()),
-            MetricsDecorator(RadonMetricsAnalysis()),
-            DifficultyClassificationDecorator(SimpleDifficultyClassifier()),
-            UniqueIdDecorator(UniqueIdGenerator()),
-        ])
-
+@click.command()
+@click.argument("paths", nargs=-1, type=click.Path(exists=True))
+@click.option("--file_name", default="output.json", help="Output file name")
 def main(paths: tuple[str, ...], file_name: str) -> None:
     files = FileCollector().collect_files(list(paths))
     results = []
     for file in files:
         with open(file, "r", encoding="utf-8") as f:
             examon_functions = [
-                chain.decorate(question)
+                my_instance().decorate(question)
                 for question in FunctionCollector().extract(f.read())
             ]
             if examon_functions:
@@ -165,7 +178,14 @@ def main(paths: tuple[str, ...], file_name: str) -> None:
 
     JSONAdapter().convert(file_name, results)
     click.echo(f"File generated: {file_name}")
+
+
+if __name__ == "__main__":
+    main()
 ```
+
+You can then use your customised chain own python script.
+
 
 ---
 
