@@ -59,7 +59,7 @@ A function intended for Examon processing must adhere to the following requireme
    The function must explicitly return a value using the `return` statement.
 
 5. **Decorator Requirement**  
-   The function must be decorated with `@examon` from `examon_core.domain.question`.
+   The function must be decorated with `@examon` from `examon_core.examon`.
 
 These constraints ensure that Examon can reliably extract, execute, and generate questions from Python functions.
 

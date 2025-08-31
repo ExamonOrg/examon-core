@@ -61,6 +61,18 @@ items = my_dict.items()
 
 
 @pytest.fixture
+def many_prints():
+    return """
+def function1():
+    print("1")
+    print("2")
+    print("3")
+    return "4"
+print(function1())
+"""
+
+
+@pytest.fixture
 def complex_code():
     return """
 import os, sys
