@@ -4,4 +4,7 @@ from examon_core.entities import Question
 
 class TestChoicesDecorator:
     def test_analyzes_code(self, complex_code):
-        pass
+        result = ChoicesDecorator().decorate(
+            Question(choices=None, correct_answer="Hello")
+        )
+        assert result.choices == ["Hello"]
