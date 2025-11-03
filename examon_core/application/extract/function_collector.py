@@ -15,9 +15,10 @@ class FunctionCollector:
                     tags = kwargs.get("tags")
                     choices = kwargs.get("choices")
                     hints = kwargs.get("hints")
-                    tags = tags if isinstance(tags, list) else None
-                    choices = choices if isinstance(choices, list) else None
-                    hints = hints if isinstance(hints, list) else None
+                    tags = self.__build_list(tags)
+                    choices = self.__build_list(choices)
+                    hints = self.__build_list(hints)
+
                     questions.append(
                         Question(
                             function_src=f,
@@ -27,6 +28,9 @@ class FunctionCollector:
                         )
                     )
         return questions
+
+    def __build_list(self, data):
+        return data if isinstance(data, list) else None
 
     def __has_examon_decorator(self, node: ast.FunctionDef) -> bool:
         for decorator in node.decorator_list:
