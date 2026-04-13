@@ -1,25 +1,40 @@
-[tool.poetry]
+[project]
 name = "examon_core"
 version = "3.0.0"
 description = "Examon Core Libs"
-authors = ["Jarrod Folino <jdfolino@icloud.com>"]
-packages = [{include = "examon_core"}]
+authors = [{ name = "Jarrod Folino", email = "jdfolino@icloud.com" }]
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+dependencies = [
+    "radon>=6.0.1,<7",
+    "dataclasses-serialization>=1.3.1,<2",
+    "click>=8.2.1,<9",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.10"
-radon = "^6.0.1"
-dataclasses-serialization = "^1.3.1"
-click = "^8.2.1"
+[project.scripts]
+examon = "examon_core.presentation.cli:main"
 
+[dependency-groups]
+dev = [
+    "mypy>=1.17.1,<2",
+    "ruff>=0.12.10,<0.13",
+    "pytest>=8.4.1,<9",
+]
 
-[tool.poetry.group.dev.dependencies]
-mypy = "^1.17.1"
-ruff = "^0.12.10"
-pytest = "^8.4.1"
+[tool.uv]
+default-groups = "all"
+
+[tool.uv.build-backend]
+module-name = ["examon_core"]
+module-root = ""
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.poetry.scripts]
-examon = "examon_core.presentation.cli:main"
+requires = ["uv_build>=0.11.3,<0.12.0"]
+build-backend = "uv_build"
